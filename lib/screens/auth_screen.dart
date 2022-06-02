@@ -6,8 +6,17 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      backgroundColor: Color(0xFFF3F4F6),
       navigationBar: CupertinoNavigationBar(
-        middle: Text('Авторизация'),
+        middle: Text(
+            'Авторизация',
+            style: TextStyle(
+              color: CupertinoColors.black,
+              fontSize: 15,
+            ),
+          ),
+        backgroundColor: CupertinoColors.white,
+        border: Border(),
       ),
       child: SafeArea(
         child: Column(
@@ -15,10 +24,41 @@ class AuthScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             CupertinoTextField(
+              style: TextStyle(
+                color: CupertinoColors.black,
+                fontSize: 16,
+              ),
               placeholder: 'Логин или почта',
+              placeholderStyle: TextStyle(
+                color: Color(0xFFC3C3C3),
+                fontSize: 16,
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
+              decoration: BoxDecoration(
+                color: Color(0xFFFEFEFE),
+              ),
             ),
+
+            Container(
+              height: 1,
+              color: Color(0xFFE0E6ED),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+            ),
+
             CupertinoTextField(
+              style: TextStyle(
+                color: CupertinoColors.black,     
+                fontSize: 16,           
+              ),
               placeholder: 'Пароль',
+              placeholderStyle: TextStyle(
+                color: Color(0xFFC3C3C3),
+                fontSize: 16,
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
+              decoration: BoxDecoration(
+                color: Color(0xFFFEFEFE),
+              ),
             ),
 
             SizedBox(height: 32),
@@ -29,8 +69,8 @@ class AuthScreen extends StatelessWidget {
                 child: Text(
                   'Войти',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
                     color: CupertinoColors.white,
+                    fontSize: 16,
                   ),
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 20),
@@ -47,8 +87,8 @@ class AuthScreen extends StatelessWidget {
                 child: Text(
                   'Зарегистрироваться',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
                     color: CupertinoColors.white,
+                    fontSize: 16,
                   ),
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 20),
