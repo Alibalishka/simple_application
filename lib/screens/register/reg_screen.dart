@@ -1,8 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-class Register extends StatelessWidget {
+class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
 
+  @override
+  _RegisterState createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
+  bool isVisible = true;
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -13,7 +20,7 @@ class Register extends StatelessWidget {
           style: TextStyle(
             color: CupertinoColors.black,
             fontSize: 16,
-          ),
+          ),  
           ),
         backgroundColor: CupertinoColors.white,
         border: Border(),
@@ -90,6 +97,7 @@ class Register extends StatelessWidget {
           ),
 
           CupertinoTextField(
+            obscureText: isVisible,
             style: TextStyle(
               color: CupertinoColors.black,
               fontSize: 16,
@@ -102,6 +110,16 @@ class Register extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
             decoration: BoxDecoration(
               color: CupertinoColors.white,
+            ),
+            suffix: GestureDetector(
+              child: Container(
+                padding: const EdgeInsets.only(right: 16),
+                child: Icon(
+                  isVisible ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
+                  color: CupertinoColors.black,
+                ),
+              ),
+              onTap: passwordView,
             ),
           ),
           Spacer(),
@@ -125,4 +143,10 @@ class Register extends StatelessWidget {
       ),
     );
   }
+  void passwordView() {
+    setState(() {
+        isVisible = !isVisible;
+    });
+  }
 }
+

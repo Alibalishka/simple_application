@@ -1,8 +1,14 @@
 import 'package:flutter/cupertino.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
+  @override
+  _AuthScreenState createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
+  bool isVisible = true;
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -46,6 +52,7 @@ class AuthScreen extends StatelessWidget {
             ),
 
             CupertinoTextField(
+              obscureText: isVisible,
               style: TextStyle(
                 color: CupertinoColors.black,     
                 fontSize: 16,           
@@ -58,6 +65,16 @@ class AuthScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
               decoration: BoxDecoration(
                 color: Color(0xFFFEFEFE),
+              ),
+              suffix: GestureDetector(
+                child: Container(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Icon(
+                    isVisible ? CupertinoIcons.eye_slash : CupertinoIcons.eye, 
+                    color: CupertinoColors.black,
+                  ),
+                ),
+                onTap: passwordView,
               ),
             ),
 
@@ -100,5 +117,10 @@ class AuthScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+  void passwordView (){
+    setState(() {
+      isVisible = !isVisible;
+    });
   }
 }
