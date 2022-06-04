@@ -1,5 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/common/widgets/custom_button.dart';
+import 'package:flutter_application_1/src/common/widgets/custom_colors.dart';
+import 'package:flutter_application_1/src/common/widgets/custom_container.dart';
+import 'package:flutter_application_1/src/common/widgets/custom_navigation_text.dart';
+import 'package:flutter_application_1/src/common/widgets/custom_padding.dart';
+import 'package:flutter_application_1/src/common/widgets/custom_text_field.dart';
+import 'package:flutter_application_1/src/common/widgets/custom_text_field_password.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -13,16 +20,10 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      backgroundColor: Color(0xFFF3F4F6),
+      backgroundColor: AppColors.scaffoldBackground,
       navigationBar: CupertinoNavigationBar(
-        middle: Text(
-          'Регистрация',
-          style: TextStyle(
-            color: CupertinoColors.black,
-            fontSize: 16,
-          ),  
-          ),
-        backgroundColor: CupertinoColors.white,
+        middle: CustomNavigationText(text: 'Регистрация'),
+        backgroundColor: AppColors.white,
         border: Border(),
       ),
       child: Column(
@@ -30,123 +31,21 @@ class _RegisterState extends State<Register> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Spacer(),
-          CupertinoTextField(
-            style: TextStyle(
-              color: CupertinoColors.black,
-              fontSize: 16,
-            ),
-            placeholder: 'Логин',
-            placeholderStyle: TextStyle(
-              color: Color(0xFFC3C3C3),
-              fontSize: 16,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
-            decoration: BoxDecoration(
-              color: CupertinoColors.white,
-            ),
-          ),
-
-          Container(
-            height: 1,
-            color: Color(0xFFE0E6ED),
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-          ),
-
-          CupertinoTextField(
-            style: TextStyle(
-              color: CupertinoColors.black,
-              fontSize: 16,
-            ),
-            placeholder: 'Телефон',
-            placeholderStyle: TextStyle(
-              color: Color(0xFFC3C3C3),
-              fontSize: 16,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
-            decoration: BoxDecoration(
-              color: CupertinoColors.white,
-            ),
-          ),
-
-          Container(
-            height: 1,
-            color: Color(0xFFE0E6ED),
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-          ),
-
-          CupertinoTextField(
-            style: TextStyle(
-              color: CupertinoColors.black,
-              fontSize: 16,
-            ),
-            placeholder: 'Почта',
-            placeholderStyle: TextStyle(
-              color: Color(0xFFC3C3C3),
-              fontSize: 16,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
-            decoration: BoxDecoration(
-              color: CupertinoColors.white,
-            ),
-          ),
-
-          Container(
-            height: 1,
-            color: Color(0xFFE0E6ED),
-            margin: const EdgeInsets.symmetric(horizontal: 16),
-          ),
-
-          CupertinoTextField(
-            obscureText: isVisible,
-            style: TextStyle(
-              color: CupertinoColors.black,
-              fontSize: 16,
-            ),
-            placeholder: 'Пароль',
-            placeholderStyle: TextStyle(
-              color: Color(0xFFC3C3C3),
-              fontSize: 16,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 19, horizontal: 16),
-            decoration: BoxDecoration(
-              color: CupertinoColors.white,
-            ),
-            suffix: GestureDetector(
-              child: Container(
-                padding: const EdgeInsets.only(right: 16),
-                child: Icon(
-                  isVisible ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
-                  color: CupertinoColors.black,
-                ),
-              ),
-              onTap: passwordView,
-            ),
-          ),
+          CustomTextField(placeholder: 'Логин'),
+          CustomContainer(),
+          CustomTextField(placeholder: 'Телефон'),
+          CustomContainer(),
+          CustomTextField(placeholder: 'Почта'),
+          CustomContainer(),
+          CustomTextFieldPassword(placeholder: 'Пароль'),
           Spacer(),
-
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 56),
-            child:CupertinoButton(
-              child: Text(
-                'Создать Аккаунт',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: CupertinoColors.white,
-                ),
-                ),
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              color: Color(0xFF4631D2),
-              onPressed: () {},
-            ),
+            padding: AppPadings.verticalHorizontal,
+            child: CustomButton(text: 'Создать Аккаунт', route: null),
           ),
         ],
       ),
     );
-  }
-  void passwordView() {
-    setState(() {
-        isVisible = !isVisible;
-    });
   }
 }
 
