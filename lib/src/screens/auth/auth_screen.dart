@@ -37,7 +37,7 @@ class _AuthScreenState extends State<AuthScreen> {
             SizedBox(height: 32),
             Padding(
               padding: AppPadings.horizontal,
-              child: CustomButton(text: 'Войти', route: null),
+              child: CustomButton(text: 'Войти', route: MainRoute),
             ),
             SizedBox(height: 19),
             Padding(
