@@ -9,4 +9,5 @@ class AppColors{
   static const Color containerBackground = Color(0xFFE0E6ED);
   static const Color placeholderColor = Color(0xFFC3C3C3);
   static const Color textFieldBackground = Color(0xFFFEFEFE);
+  static const Color gray = Color(0xFF929292);
 }
