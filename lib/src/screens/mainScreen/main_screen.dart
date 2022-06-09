@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_colors.dart';
 import 'package:flutter_application_1/src/screens/auth/auth_screen.dart';
+import 'package:flutter_application_1/src/screens/map/map_screen.dart';
 import 'package:flutter_application_1/src/screens/register/reg_screen.dart';
 import 'package:flutter_application_1/src/screens/stories/stories_screen.dart';
 
@@ -26,7 +27,7 @@ class MainScreen extends StatelessWidget {
               case 0:
                 return StoriesScreen();
               case 1:
-                return Register();
+                return MapScreen();
               case 2:
                 return AuthScreen();
               case 3:
