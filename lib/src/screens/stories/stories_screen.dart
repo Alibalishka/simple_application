@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_colors.dart';
-import 'package:flutter_application_1/src/common/widgets/custom_text_field.dart';
+import 'package:flutter_application_1/src/common/widgets/custom_padding.dart';
+import 'package:flutter_application_1/src/router/routing_const.dart';
+import 'package:flutter_application_1/src/screens/detail/detail_screen.dart';
 
 class StoriesScreen extends StatelessWidget {
   const StoriesScreen({Key? key}) : super(key: key);
@@ -23,66 +25,60 @@ class StoriesScreen extends StatelessWidget {
             
             Expanded(
               child: ListView.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: AppPadings.horizontal,
                 itemCount: 10,
                 itemBuilder: (BuildContext context, int index){
-                  return Container(
-                    height: 234,
-                    decoration: BoxDecoration(
-                      color: AppColors.white,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image.asset('assets/images/esentai.png',
-                            fit: BoxFit.fitWidth,
-                            width: double.infinity,
-                            height: 140,
-                          ),
-                        ),
-                        
-                        Padding( 
-                        padding: const EdgeInsets.symmetric(horizontal: 32),
-                          child: Container(
-                            height: 94,
-                            color: AppColors.buttonBackground,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  child: Column(
-                                    children: [
-                                      Text('Esenetai Mall', 
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold
-                                        ),
-                                      ),
-                                      Flexible(
-                                        child: RichText(
-                                          overflow: TextOverflow.ellipsis,
-                                          strutStyle: StrutStyle(fontSize: 12.0),
-                                          text: TextSpan(
-                                            text: 'Один из крупнейших торговых центров в'
-                                          ),
-                                        ),
-                                      ),
-                                      Text(''),
-                                      Text('Esenetai Mall'),
-                                    ],
-                                  )
-                                ),
-                                Container(
-                                  child: Icon(CupertinoIcons.heart_fill, color: CupertinoColors.systemRed),
-                                )
-                                
-                              ],
+                  return GestureDetector(
+                    onTap: () => Navigator.of(context, rootNavigator: true).pushNamed(RestaurantDetailRoute),
+                    child: Container(
+                      height: 234,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.asset('assets/images/esentai.png',
+                              fit: BoxFit.fitWidth,
+                              width: double.infinity,
+                              height: 140,
                             ),
                           ),
-                        ),                        
-                      ],
+                          
+                          Padding( 
+                          padding: const EdgeInsets.symmetric(horizontal: 32),
+                            child: Container(
+                              width: double.infinity,
+                              height: 94,
+                              // color: AppColors.buttonBackground,
+                              child: Row(
+                                children: [ 
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Esentai Mall',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                        CustomStoriesText(text: 'Один из крупнейших торговых центров в городе'),
+                                        CustomStoriesText(text: 'Аль-Фараби'),
+                                      ],
+                                    )
+                                  ),
+                                  Icon(CupertinoIcons.heart_fill, color: CupertinoColors.systemRed, size: 30,),
+                                ],
+                              ),
+                            ),
+                          ),                        
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -94,6 +90,25 @@ class StoriesScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class CustomStoriesText extends StatelessWidget {
+  final String? text;
+  const CustomStoriesText({
+    this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(text!,
+    maxLines: 1,
+    overflow: TextOverflow.ellipsis,
+    style: TextStyle(
+      color: AppColors.gray,
+      fontSize: 14,
+    ),
     );
   }
 }
