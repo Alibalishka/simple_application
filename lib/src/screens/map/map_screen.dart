@@ -21,7 +21,7 @@ class _MapScreenState extends State<MapScreen> {
   late GoogleMapController googleMapController;
  
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(10, 10),
+    target: LatLng(200, 10),
     zoom: 14,
   );
 
@@ -34,43 +34,49 @@ class _MapScreenState extends State<MapScreen> {
       child: SafeArea(
         child: Stack(
           children: [
-              Container(
-                child: GoogleMap(
+                  GoogleMap(
                     initialCameraPosition: _kGooglePlex,
-                    // markers: markers,
+                    markers: markers,
                     mapType: MapType.normal,
-                    zoomControlsEnabled: true,
+                    zoomControlsEnabled: false,
                     onMapCreated: (GoogleMapController controller){
                       googleMapController = controller;
                     },
                   ),
-              ),
               Padding(
                 padding: AppPadings.verticalHorizontal,
                 child: SearchTextField()
               ),
+
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15, right: 10),
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: FloatingActionButton(
+                    child: const Icon(CupertinoIcons.location, color: AppColors.black),
+                    backgroundColor: AppColors.white,
+
+                    onPressed: () async{
+                      Position position = await _determinePosition();
+
+                      googleMapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                        target: LatLng(position.latitude, position.longitude),
+                        zoom: 15.0,
+                      )));
+
+                      markers.clear();
+                      markers.add(Marker(markerId: const MarkerId('currentLocation'), position: LatLng(position.latitude, position.longitude)));
+
+                      setState(() {
+                        
+                      });
+                    }
+                  ),
+                ),
+              ),
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: () async{
-      //     Position position = await _determinePosition();
-
-      //     googleMapController.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
-      //       target: LatLng(position.latitude, position.longitude),
-      //       zoom: 15.0,
-      //     )));
-
-      //     markers.clear();
-      //     markers.add(Marker(markerId: const MarkerId('currentLocation'), position: LatLng(position.latitude, position.longitude)));
-
-      //     setState(() {
-            
-      //     });
-      //   }, 
-      //   label: Text(''),
-      //   icon: Icon(Icons.navigation_rounded),
-      // ),
     );
   }
 
