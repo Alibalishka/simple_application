@@ -4,7 +4,9 @@ import 'package:flutter_application_1/src/screens/auth/auth_screen.dart';
 import 'package:flutter_application_1/src/screens/detail/detail_screen.dart';
 import 'package:flutter_application_1/src/screens/mainScreen/main_screen.dart';
 import 'package:flutter_application_1/src/screens/map/map_screen.dart';
+import 'package:flutter_application_1/src/screens/profile/profile_screen.dart';
 import 'package:flutter_application_1/src/screens/register/reg_screen.dart';
+import 'package:flutter_application_1/src/screens/wishList/wish_list_screen.dart';
 
 class AppRouter{
   static Route generateRoute(RouteSettings routeSettings){
@@ -28,6 +30,14 @@ class AppRouter{
       case MapRoute:
         return CupertinoPageRoute(
           builder: (context) => MapScreen(),
+        );
+      case WishListRoute:
+        return CupertinoPageRoute(
+          builder: (context) => WishListScreen(),
+        );
+      case ProfileRoute:
+        return CupertinoPageRoute(
+          builder: (context) => ProfileScreen(),
         );
       default:
         return CupertinoPageRoute(
