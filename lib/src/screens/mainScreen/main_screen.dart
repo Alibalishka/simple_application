@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_colors.dart';
 import 'package:flutter_application_1/src/screens/auth/auth_screen.dart';
 import 'package:flutter_application_1/src/screens/map/map_screen.dart';
+import 'package:flutter_application_1/src/screens/profile/profile_screen.dart';
 import 'package:flutter_application_1/src/screens/register/reg_screen.dart';
 import 'package:flutter_application_1/src/screens/stories/stories_screen.dart';
+import 'package:flutter_application_1/src/screens/wishList/wish_list_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -29,9 +31,9 @@ class MainScreen extends StatelessWidget {
               case 1:
                 return MapScreen();
               case 2:
-                return AuthScreen();
+                return WishListScreen();
               case 3:
-                return Register();
+                return ProfileScreen();
               default:
                 return AuthScreen();
             }
