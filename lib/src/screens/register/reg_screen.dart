@@ -41,7 +41,7 @@ class _RegisterState extends State<Register> {
           Spacer(),
           Padding(
             padding: AppPadings.verticalHorizontal,
-            child: CustomButton(text: 'Создать Аккаунт', route: null),
+            child: CustomButton(text: 'Создать Аккаунт', onPressed: null),
           ),
         ],
       ),
