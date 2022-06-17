@@ -4,11 +4,11 @@ import 'package:flutter_application_1/src/common/widgets/custom_colors.dart';
 class CustomButton extends StatelessWidget {
 
   final String? text;
-  final String? route;
+  final VoidCallback? onPressed;
 
   const CustomButton({
     this.text,
-    this.route,
+    this.onPressed,
   });
 
   @override
@@ -23,9 +23,7 @@ class CustomButton extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(vertical: 20),
       color: AppColors.buttonBackground,
-      onPressed: () {
-        Navigator.pushNamed(context, route!);
-      },
+      onPressed: onPressed,
     );
   }
 }
