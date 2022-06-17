@@ -4,11 +4,14 @@ import 'package:flutter_application_1/src/common/widgets/custom_padding.dart';
 
 class CustomTextFieldPassword extends StatefulWidget {
 
-  final String? placeholder;
-
   const CustomTextFieldPassword({
+    Key? key,
     this.placeholder,
-  });
+    this.controller,
+  }) : super(key: key);
+
+  final String? placeholder;
+  final TextEditingController? controller;
 
   @override
   _CustomTextFieldPasswordState createState() => _CustomTextFieldPasswordState();
@@ -24,6 +27,7 @@ class _CustomTextFieldPasswordState extends State<CustomTextFieldPassword> {
         color: AppColors.black,
         fontSize: 16,
       ),
+      controller: widget.controller,
       placeholder: widget.placeholder,
       placeholderStyle: TextStyle(
         color: AppColors.placeholderColor,
