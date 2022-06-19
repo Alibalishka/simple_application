@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_colors.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_navigation_text.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_padding.dart';
+import 'package:flutter_application_1/src/router/routing_const.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -80,7 +81,7 @@ class CustomButtonWidget extends StatelessWidget {
         ),
         padding: EdgeInsets.symmetric(horizontal: 25),
         color: AppColors.white, 
-        onPressed: (){}
+        onPressed: () => Navigator.of(context, rootNavigator: true).pushReplacementNamed(AuthRoute),
       ),
     );
   }
