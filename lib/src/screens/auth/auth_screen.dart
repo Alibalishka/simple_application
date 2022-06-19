@@ -9,6 +9,8 @@ import 'package:flutter_application_1/src/common/widgets/custom_text_field.dart'
 import 'package:flutter_application_1/src/common/widgets/custom_text_field_password.dart';
 import 'package:flutter_application_1/src/router/routing_const.dart';
 import 'package:flutter_application_1/src/screens/mainScreen/main_screen.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -53,6 +55,7 @@ class _AuthScreenState extends State<AuthScreen> {
               child: CustomButton(
                 text: 'Войти', 
                 onPressed: () async{
+                  Box tokensBox = Hive.box('tokens');
                   try{
                   Response response = await dio.post(
                     'http://api.codeunion.kz/api/v1/auth/login',
@@ -61,7 +64,12 @@ class _AuthScreenState extends State<AuthScreen> {
                       'password': passwordController.text,
                     },
                   );
-                  print(response.data);
+                  // print(response.data);
+                  tokensBox.put('access', response.data['tokens']['accessToken']);
+                  tokensBox.put('refresh', response.data['tokens']['refreshToken']);
+
+                  // print('accessToken:' + tokensBox.get('access'));
+                  
                   Navigator.pushReplacementNamed(context, MainRoute);
                   } on DioError catch (e){
                     showCupertinoModalPopup(
