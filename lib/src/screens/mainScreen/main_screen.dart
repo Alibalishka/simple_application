@@ -12,34 +12,39 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoTabScaffold(
-      tabBar: CupertinoTabBar(
-        backgroundColor: AppColors.white,
-        items: [
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), label: 'Лента'),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.map), label: 'Карта'),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.heart), label: 'Избранные'),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled), label: 'Профиль'),
-        ],
-      ),
-      tabBuilder: (context, index){
-        return CupertinoTabView(
-          builder: (context){
-            switch (index) {
-              case 0:
-                return StoriesScreen();
-              case 1:
-                return MapScreen();
-              case 2:
-                return WishListScreen();
-              case 3:
-                return ProfileScreen();
-              default:
-                return AuthScreen();
+    return WillPopScope(
+      onWillPop: () {
+        return Future.value(false);
+      },
+      child: CupertinoTabScaffold(
+        tabBar: CupertinoTabBar(
+          backgroundColor: AppColors.white,
+          items: [
+            BottomNavigationBarItem(icon: Icon(CupertinoIcons.home), label: 'Лента'),
+            BottomNavigationBarItem(icon: Icon(CupertinoIcons.map), label: 'Карта'),
+            BottomNavigationBarItem(icon: Icon(CupertinoIcons.heart), label: 'Избранные'),
+            BottomNavigationBarItem(icon: Icon(CupertinoIcons.profile_circled), label: 'Профиль'),
+          ],
+        ),
+        tabBuilder: (context, index){
+          return CupertinoTabView(
+            builder: (context){
+              switch (index) {
+                case 0:
+                  return StoriesScreen();
+                case 1:
+                  return MapScreen();
+                case 2:
+                  return WishListScreen();
+                case 3:
+                  return ProfileScreen();
+                default:
+                  return AuthScreen();
+              }
             }
-          }
-        );
-      }
+          );
+        }
+      ),
     );
   }
 }
