@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/src/common/models/tokens_model.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_button.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_colors.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_container.dart';
@@ -64,12 +65,27 @@ class _AuthScreenState extends State<AuthScreen> {
                       'password': passwordController.text,
                     },
                   );
-                  // print(response.data);
-                  tokensBox.put('access', response.data['tokens']['accessToken']);
-                  tokensBox.put('refresh', response.data['tokens']['refreshToken']);
 
-                  // print('accessToken:' + tokensBox.get('access'));
+                  // TokensModel tokensModel = TokensModel(
+                  //   access: response.data['tokens']['accessToken'], 
+                  //   refresh: response.data['tokens']['refreshToken'], 
+                  // );
+
+                  TokensModel tokensModel = TokensModel.fromJson(
+                    response.data['tokens'],
+                  );
+
+                  // print(tokensModel.access);
+                  // print(response.data);
+
+                  // tokensBox.put('access', response.data['tokens']['accessToken']);
+                  // tokensBox.put('refresh', response.data['tokens']['refreshToken']);
+
+                  tokensBox.put('access', tokensModel.access);
+                  tokensBox.put('refresh', tokensModel.refresh);
                   
+                  // print('accessToken:' + tokensBox.get('access'));
+
                   Navigator.pushReplacementNamed(context, MainRoute);
                   } on DioError catch (e){
                     showCupertinoModalPopup(
