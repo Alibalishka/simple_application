@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_application_1/src/common/models/tokens_model.dart';
+import 'package:flutter_application_1/src/common/models/user_model.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_button.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_colors.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_container.dart';
@@ -75,6 +76,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     response.data['tokens'],
                   );
 
+                  UserModel userModel = UserModel.fromJson(response.data['user']);
+
                   // print(tokensModel.access);
                   // print(response.data);
 
@@ -83,6 +86,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
                   tokensBox.put('access', tokensModel.access);
                   tokensBox.put('refresh', tokensModel.refresh);
+                  tokensBox.put('email', userModel.email);
+                  tokensBox.put('email', userModel.nickname);
                   
                   // print('accessToken:' + tokensBox.get('access'));
 
