@@ -10,9 +10,11 @@ import 'package:flutter_application_1/src/common/widgets/custom_padding.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_text_field.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_text_field_password.dart';
 import 'package:flutter_application_1/src/router/routing_const.dart';
+import 'package:flutter_application_1/src/screens/auth/bloc/log_in_bloc.dart';
 import 'package:flutter_application_1/src/screens/mainScreen/main_screen.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -54,51 +56,18 @@ class _AuthScreenState extends State<AuthScreen> {
             SizedBox(height: 32),
             Padding(
               padding: AppPadings.horizontal,
-              child: CustomButton(
-                text: 'Войти', 
-                onPressed: () async{
-                  Box tokensBox = Hive.box('tokens');
-                  try{
-                  Response response = await dio.post(
-                    'http://api.codeunion.kz/api/v1/auth/login',
-                    data: {
-                      'email': emailController.text,
-                      'password': passwordController.text,
-                    },
-                  );
-
-                  // TokensModel tokensModel = TokensModel(
-                  //   access: response.data['tokens']['accessToken'], 
-                  //   refresh: response.data['tokens']['refreshToken'], 
-                  // );
-
-                  TokensModel tokensModel = TokensModel.fromJson(
-                    response.data['tokens'],
-                  );
-
-                  UserModel userModel = UserModel.fromJson(response.data['user']);
-
-                  // print(tokensModel.access);
-                  // print(response.data);
-
-                  // tokensBox.put('access', response.data['tokens']['accessToken']);
-                  // tokensBox.put('refresh', response.data['tokens']['refreshToken']);
-
-                  tokensBox.put('access', tokensModel.access);
-                  tokensBox.put('refresh', tokensModel.refresh);
-                  tokensBox.put('email', userModel.email);
-                  tokensBox.put('email', userModel.nickname);
-                  
-                  // print('accessToken:' + tokensBox.get('access'));
-
-                  Navigator.pushReplacementNamed(context, MainRoute);
-                  } on DioError catch (e){
+              child:BlocConsumer<LogInBloc, LogInState>(
+                listener: (context, state){
+                  if(state is LogInLoaded){
+                    // Переходим на страницу MainScreen, если пользователь успешно авторизовался
+                    Navigator.pushReplacementNamed(context, MainRoute);
+                  }else if(state is LogInFailed){
                     showCupertinoModalPopup(
                       context: context, 
                       builder: (context){
                         return CupertinoAlertDialog(
                           title: Text('Ошибка'),
-                          content: Text('Неправильный логин или проль!'),
+                          content: Text(state.errMessage ?? ''),
                           actions: [
                             CupertinoButton(
                               child: Text('OK'), 
@@ -106,12 +75,24 @@ class _AuthScreenState extends State<AuthScreen> {
                             ),
                           ],
                         );
-                      },
+                      } 
                     );
-                    throw e;
                   }
                 },
-              ),
+                builder: (context, state){
+                  return CustomButton(
+                    text: 'Войти',
+                    onPressed: state is LogInLoading ? null : (){
+                      context.read<LogInBloc>().add(
+                        LogInPressed(
+                          email: emailController.text, 
+                          password: passwordController.text,
+                        ),
+                      );
+                    }
+                  );
+                },
+              )
             ),
             SizedBox(height: 19),
             Padding(
