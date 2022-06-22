@@ -8,6 +8,7 @@ import 'package:flutter_application_1/src/screens/detail/detail_screen.dart';
 import 'package:flutter_application_1/src/screens/mainScreen/main_screen.dart';
 import 'package:flutter_application_1/src/screens/map/map_screen.dart';
 import 'package:flutter_application_1/src/screens/profile/profile_screen.dart';
+import 'package:flutter_application_1/src/screens/register/bloc/reg_in_bloc.dart';
 import 'package:flutter_application_1/src/screens/register/reg_screen.dart';
 import 'package:flutter_application_1/src/screens/wishList/wish_list_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +28,12 @@ class AppRouter{
         );
       case RegisterRoute:
         return CupertinoPageRoute(
-          builder: (context) => Register(),
+          builder: (context) => BlocProvider(
+            create: (context) => RegInBloc(
+              dio: getIt<Dio>(),
+            ),
+            child: Register(),
+          ),
         );
       case MainRoute:
         return CupertinoPageRoute(
