@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_application_1/src/common/dependencies/injection_container.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_colors.dart';
 import 'package:flutter_application_1/src/router/router.dart';
 import 'package:flutter_application_1/src/router/routing_const.dart';
@@ -11,6 +12,7 @@ void main() async{
   await Hive.initFlutter();
   // Создаем коробку tokens что-бы сохранить токены 
   await Hive.openBox('tokens');
+  initGetIt();
   runApp(MyApp());
 }
 
