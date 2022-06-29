@@ -1,12 +1,23 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/src/common/models/user_model.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_colors.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_navigation_text.dart';
 import 'package:flutter_application_1/src/common/widgets/custom_padding.dart';
 import 'package:flutter_application_1/src/router/routing_const.dart';
+import 'package:hive/hive.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  
+  final Box tokensBox = Hive.box('tokens');
 
   @override
   Widget build(BuildContext context) {
