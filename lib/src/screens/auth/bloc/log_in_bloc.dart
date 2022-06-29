@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_application_1/src/common/models/tokens_model.dart';
+import 'package:flutter_application_1/src/common/models/user_model.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 
@@ -37,9 +38,14 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         TokensModel tokensModel = TokensModel.fromJson(
           response.data['tokens'],
         );
+        UserModel userModel = UserModel.fromJson(
+          response.data['user'],
+        );
 
         tokensBox.put('access', tokensModel.access);
         tokensBox.put('refresh', tokensModel.refresh);
+        tokensBox.put('name', userModel.nickname);
+        tokensBox.put('email', userModel.email);
 
         yield LogInLoaded();
       }on DioError catch(e){
