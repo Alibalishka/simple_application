@@ -4,11 +4,14 @@ import 'package:flutter_application_1/src/common/widgets/custom_padding.dart';
 
 class CustomTextField extends StatelessWidget {
 
-  final String? placeholder;
-
   const CustomTextField({
+    Key? key,
     this.placeholder,
-  });
+    this.controller,
+  }) : super(key: key) ;
+
+  final String? placeholder;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,7 @@ class CustomTextField extends StatelessWidget {
         color: AppColors.black,
         fontSize: 16,
       ),
+      controller: controller,
       placeholder: placeholder,
       placeholderStyle: TextStyle(
         color: AppColors.placeholderColor,

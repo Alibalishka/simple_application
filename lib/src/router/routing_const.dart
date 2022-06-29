@@ -1,11 +1,11 @@
-const String MainRoute = '/';
+const String MainRoute = '/main';
 
-const String AuthRoute = '/auth/login';
+const String AuthRoute = '/';
 const String RegisterRoute = '/auth/register';
 
 const String HomeRoute = '/restaurants';
 const String MapRoute = '/restaurants/map';
-const String FavouritesRoute = '/restaurants/favourites';
+const String WishListRoute = '/restaurants/favourites';
 const String SearchRoute = '/restaurants/search';
 const String ProfileRoute = '/profile';
 
